@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Services.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <title>Services</title>
+</head>
+<body>
+  <div class="dropdown">
+  <input type="checkbox" id="toggle">
+  <label for="toggle" class="btn"><i class="fa-solid fa-gear"></i></label>
+  <div class="menu">
+    <button><i class="fa-solid fa-language"></i></button>
+    <button><i class="fa-solid fa-circle-half-stroke"></i></button>
+  </div>
+</div>
+
+     <header>
+    <nav>
+        <div class="NavHeader" style="padding-bottom: 11px;">
+         <h1>
+           <a href="/index.html">
+           <i class="fa-solid fa-bus" style="color: #e8a411;"></i>
+            MrBus Company</a> 
+         </h1>
+        </div>
+        <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+        </div>
+        <div class="navlinks">
+         <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/html/BookTrip.html">BookTrip</a></li>
+            <li><a href="/html/Services.html">Services</a></li>
+            <li><a href="/html/About.html">About</a></li>
+            <li><a href="/html/MyAccount.html">MyAccount</a></li>
+         </ul>
+        </div>
+    </nav>
+    
+</header>
+<div style="margin: 60px auto auto auto;
+      padding: 2rem 1rem 1.25rem;
+      border-bottom: 1px solid gray;">
+    <div class="masthead">
+      <h1 class="logo">MrBus Services</h1>
+      <p class="dek">Here you will know what we are offering and can order it to be one of our family.</p>
+    </div>
+</div>
+
+ <main class="sheet" aria-label="Newspaper column feed">
+
+    <article class="story" aria-labelledby="h-train">
+  <img src="/Icons/bustripimg.jpeg" alt="Bus Trips" class="thumb" loading="lazy">
+  <div class="pad">
+    <span class="kicker">Feature</span>
+    <h2 id="h-train" class="headline">Buses Trips</h2>
+    <p class="lede">
+      Comfortable and reliable bus trips connecting cities and communities.
+      Travel safely and affordably with services designed for everyday journeys.
+    </p>
+    <blockquote class="pull">
+      “Every journey is better when the road is shared.”
+    </blockquote>
+    <a href="#" class="read-more" onclick="document.getElementById('story1').showModal(); return false;">
+      Read Full Story
+    </a>
+    <div class="meta">
+      <span>Public Transport Services</span>
+      <span>~ Comfortable & Affordable</span>
+    </div>
+  </div>
+</article>
+
+<article class="story" aria-labelledby="h-oak">
+  <img src="/Icons/vipvan.jpg" alt="VIP Van Trips" class="thumb" loading="lazy">
+  <div class="pad">
+    <span class="kicker">Premium Travel</span>
+    <h2 id="h-oak" class="headline">Vip Vans Trips</h2>
+    <p class="lede">
+      Premium VIP van trips for small groups and private travel.
+      Enjoy spacious seating, comfort, and flexible schedules.
+    </p>
+    <blockquote class="pull">
+      “Travel together. Arrive in comfort.”
+    </blockquote>
+    <a href="#" class="read-more" onclick="document.getElementById('story2').showModal(); return false;">
+      Read Full Story
+    </a>
+    <div class="meta">
+      <span>VIP Transport</span>
+      <span>~ Private & Comfortable</span>
+    </div>
+  </div>
+</article>
+
+<article class="story" aria-labelledby="h-lantern">
+  <img src="/Icons/carwithdriver.jpg" alt="Car Rental with Driver" class="thumb" loading="lazy">
+  <div class="pad">
+    <span class="kicker">Private Service</span>
+    <h2 id="h-lantern" class="headline">Rent Cars With Drivers</h2>
+    <p class="lede">
+      Rent a car with a professional driver for stress-free travel.
+      Relax while experienced drivers take you to your destination.
+    </p>
+    <blockquote class="pull">
+      “Your destination matters. Your comfort matters more.”
+    </blockquote>
+    <a href="#" class="read-more" onclick="document.getElementById('story3').showModal(); return false;">
+      Read Full Story
+    </a>
+    <div class="meta">
+      <span>Chauffeur Services</span>
+      <span>~ Safe & Reliable</span>
+    </div>
+  </div>
+</article>
+
+
+  </main>
+<!-- ============================== DIALOGS (full texts) ============================== -->
+
+  <dialog id="story1" aria-labelledby="story1-title">
+  <button class="close-btn" onclick="this.parentElement.close()" aria-label="Close story">✕</button>
+  <img src="/Icons/bustripimg.jpeg" alt="Bus Trips full" loading="lazy">
+  <h2 id="story1-title">Bus Trips</h2>
+
+  <p>
+    Our bus trips offer a safe, comfortable, and affordable way to travel between cities.
+    With fixed schedules and professional drivers, you can rely on us for your daily and long-distance journeys.
+  </p>
+
+  <p>
+    Modern buses, air-conditioned seating, and well-planned routes ensure a smooth experience
+    whether you are commuting for work or traveling for leisure.
+  </p>
+
+  <p>
+    Sit back, relax, and enjoy the road knowing your journey is in good hands.
+  </p>
+</dialog>
+
+<!-- Dialog 2: VIP Van Trips -->
+<dialog id="story2" aria-labelledby="story2-title">
+  <button class="close-btn" onclick="this.parentElement.close()" aria-label="Close story">✕</button>
+  <img src="/Icons/vipvan.jpg" alt="VIP Van Trips full" loading="lazy">
+  <h2 id="story2-title">VIP Van Trips</h2>
+
+  <p>
+    Our VIP van trips are designed for small groups who value privacy and comfort.
+    Ideal for families, friends, and business teams traveling together.
+  </p>
+
+  <p>
+    Enjoy spacious seating, flexible departure times, and a premium travel atmosphere
+    that makes every trip smooth and stress-free.
+  </p>
+
+  <p>
+    Travel together, arrive relaxed, and enjoy the journey as much as the destination.
+  </p>
+</dialog>
+
+<!-- Dialog 3: Rent Cars With Drivers -->
+<dialog id="story3" aria-labelledby="story3-title">
+  <button class="close-btn" onclick="this.parentElement.close()" aria-label="Close story">✕</button>
+  <img src="/Icons/carwithdriver.jpg" alt="Car Rental with Driver full" loading="lazy">
+  <h2 id="story3-title">Rent Cars With Drivers</h2>
+
+  <p>
+    Renting a car with a professional driver gives you complete freedom without the stress of driving.
+    Perfect for business trips, city tours, and special occasions.
+  </p>
+
+  <p>
+    Our experienced drivers handle navigation, traffic, and timing,
+    so you can focus on your plans and enjoy a comfortable ride.
+  </p>
+
+  <p>
+    Your destination matters — your comfort comes first.
+  </p>
+</dialog>
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-section brand">
+      <h4 style="font-size: 25px; padding-bottom: 10px;">MrBus</h4>
+      <p>Your Rest Is Our Proparity</p>
+    </div>
+    <div class="footer-section links">
+      <h4>fast links</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/html/Services.html">Services</a></li>
+        <li><a href="/html/About.html">About</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-section social">
+      <h4>Follow</h4>
+      <div class="social-icons">
+       <a href="#Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#Youtube" aria-label="LinkedIn"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="footer-section Developer">
+      <h4>MrBus Website Developer</h4>
+      <p>Email: <span>omarkyhamed1996@gmail.com</span></p>
+      <address>Address: Jordan - Aqaba</address>
+      <p>Mobile: +962 798 678 036</p>
+      <div class="social-icons">
+          <a href="#Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 MrBus Company. All rights reserved.</p>
+  </div>
+</footer>
+<script src="/js/all.min.js"></script>
+<script src="/js/services.js"></script>
+</body>
+</html>

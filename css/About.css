@@ -1,0 +1,447 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+      --NavText-Color-BeforeHover: rgb(77, 77, 77);
+      --NavText-Color-AfterHover: rgb(255, 255, 255);
+     --NavBackground-Color-BeforeHover: rgba(19,31,47,0);
+     --NavBackground-Color-AfterHover: rgba(60, 75, 94, 0.8);
+    --HeaderSectionsTitle-color: rgb(226, 24, 24);
+    --NavLogo-Color: rgb(224, 147, 4);
+    --bodyBack-Color: #fcfcfc;
+    --HeaderNavFont-Size: clamp(1.3rem,1.8vw,5rem);
+    --Navfont-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    --nav-hover-color: orange;
+    --HeaderNavColor-Hover: rgb(230, 34, 34);
+    --ActiveNavBoxShadow : rgba(0,0,0,0.4);
+    --accent: #e17c1d;       /* rose-600 */
+    --accent-ink: #fff5f7;
+    --footerText-Color:#ebebeb ;
+     --menu-buttonbg: #333;
+    --menu-buttontxt: #fff;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+html, body {
+  height: 100%;
+}
+body{
+    font-family: "Roboto",sans-serif;
+    background-color: var(--bodyBack-Color);
+    color: var(--NavText-Color-BeforeHover);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+body h2{
+    font-size: 3rem;
+}body h3{
+    font-size: 3rem;
+}
+body p{
+    font-size: 1.2rem;
+}
+img.drop-shadow-example {
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+}
+.dropdown {
+  position: fixed;
+  z-index: 1000;
+  left: 10px;
+  bottom: 20px;
+}
+.fa-gear{
+    color: var(--menu-buttontxt);
+}
+#toggle {
+  display: none;
+}
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--menu-buttonbg);
+  color: var(--menu-buttontxt);
+  cursor: pointer;
+  user-select: none;
+}
+.menu {
+  position: absolute;
+  bottom: 100%;      /* فوق الزر */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+#toggle:checked ~ .menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.menu button:hover {
+  background: #f2f2f2;
+}
+
+
+
+header{
+    background-color:var(--NavBackground-Color-BeforeHover);
+    height: 60px;
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index:1000;
+    transition: all 0.3s ease;
+}/* عند السكرول = نفس لل جافا سكريبن hover  */ 
+header.scrolled{
+    background-color:var(--NavBackground-Color-AfterHover);
+    box-shadow: 0 7px 15px 1px var(--ActiveNavBoxShadow);
+}
+header.scrolled nav a{
+    color:var(--NavText-Color-AfterHover);
+}
+header.scrolled .fa-bars{
+    color: orange;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+nav ul {
+   display: flex;
+   gap: 3vw;
+}
+nav li{
+ display: flex;
+list-style: none;
+}
+nav a{
+    position: relative;
+    color: var(--NavText-Color-BeforeHover);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: var(--Navfont-size);
+    font-weight: 500;
+}
+.navlinks a:hover{
+color :var(--nav-hover-color);
+}
+.navlinks a::after{
+content: '';
+position: absolute;
+left:0;bottom: -4px;
+width: 0;height: 2px;
+background-color:var(--nav-hover-color) ;
+transition: width 0.3s ease;
+}
+.navlinks a:hover::after{
+width: 100%;
+}
+.NavHeader a{
+    color: var(--NavLogo-Color);
+    font-size: var(--HeaderNavFont-Size);
+     font-weight: 800;
+}
+.NavHeader{
+    transition: all 0.2s ease;
+}
+.NavHeader:hover{
+   transform:scale(1.03);
+}
+header:hover{
+      background-color:var(--NavBackground-Color-AfterHover);
+     box-shadow: 0 7px 15px 1px var(--ActiveNavBoxShadow);
+}
+header:hover nav a{
+      color:var(--NavText-Color-AfterHover);
+}
+header:hover .fa-bars{
+      color: orange;
+}
+.menu-toggle{
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--NavText-Color-BeforeHover);
+}
+@media (max-width:700px){
+    nav{
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    .navlinks{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        background-color: var(--NavBackground-Color-AfterHover);
+
+        transform: translateY(-20px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            transform 0.45s cubic-bezier(.4,0,.2,1),
+            opacity 0.35s ease,
+            visibility 0.35s ease;
+    }
+    .navlinks ul{
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+    }
+    .navlinks li{
+        padding: 15px 0;
+    }
+    .navlinks a{
+        color: var(--NavText-Color-AfterHover);
+        font-size: 1.1rem;
+        width: 100%;
+    }
+    .menu-toggle{
+        display: block;
+    }
+    /* لما المنيو تفتح */
+    .navlinks.active{
+        transform: translateY(0);
+        opacity: 0.99;
+        visibility: visible;
+        pointer-events: auto;
+    box-shadow: 0 7px 15px 1px var(--ActiveNavBoxShadow);
+    }
+}/* لما منيو الموبايل مفتوحة */
+header.menu-open{
+    background-color: var(--NavBackground-Color-AfterHover);
+}
+/* إلغاء تأثير hover أثناء فتح المنيو */
+header.menu-open:hover{
+    background-color: var(--NavBackground-Color-AfterHover);
+}
+/* تثبيت لون اللينكات */
+header.menu-open nav a{
+    color: var(--NavText-Color-AfterHover);
+}
+header.menu-open .navlinks a::after{
+    width: 0;
+}
+header.menu-open .fa-bars{
+    color: orange;
+}
+
+
+main{
+  flex: 1;
+}
+.About-Sec {
+    width: 100%;
+    height: 100%;
+    background: url("/Icons/LoginBack.jpg") center/cover no-repeat;
+    background-color: var(--bodyBack-Color);
+    padding: 80px 8% 50px 8%;
+    text-shadow: 0px 7px 15px rgba(0, 0, 0,0.1);
+    display: flex;
+    align-items: center;
+}
+.About-Sec::-webkit-scrollbar{
+    display: none;
+}
+.centersection{
+margin: 10px 0;
+}
+.Left-text {
+    line-height: 1.7;
+    padding: 0 0 40px 0;
+}
+.Left-text h2{
+    color: var(--HeaderSectionsTitle-color);
+}
+/* الصورة */
+.Info-img {
+    float: right;
+    width: 35%;
+    shape-outside: circle(90%);
+    clip-path: circle(50%);
+}
+.More-Buttons{
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 2vw;
+margin-top: 20px;
+}
+.More-Buttons button{
+    background: linear-gradient(45deg , red,orange);
+}
+.Hero-button{
+    width: 140px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+     box-shadow: 0 7px 14px rgb(0, 0, 0,0.2);
+}
+.Hero-button:hover{
+    scale: 1.02;
+}
+@media (max-width: 1200px) {
+    .Left-text {
+    line-height: 1.7;
+    padding: 70px 0 40px 0;
+}
+}
+@media (max-width: 900px) {
+    .About-Sec{
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .Left-text{
+       align-items: center;
+        padding-left: 0px;
+        padding-top: 30px;
+    }
+    .Info-img{
+        width: 100%;
+    }
+    .More-Buttons{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 20px;
+    }
+}
+
+
+
+.site-footer {
+  background-color: #1b1b1b;
+  color: var(--footerText-Color);
+  padding: 40px 20px 20px;
+  font-family: Segoe UI, Roboto, Arial, sans-serif;
+}
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-items: center;
+  min-width: 70vw;
+}
+.footer-section {
+  flex: 1 1 200px; /* مرن حسب الشاشة */
+  opacity: 0.90;
+}
+.footer-section.brand {
+  display: flex;
+  flex-direction: column; /* هذا يجعل النص تحت العنوان */
+  align-items: center; /* أو center حسب رغبتك */
+  justify-content: center;
+  padding-right: 250px;
+  margin-left: 30px;
+}
+.footer-section.brand h2 {
+  margin: 10px 0;
+  font-size: 1.8rem;
+  opacity: 0.8;
+}
+.footer-section.brand p {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+.footer-section h4{
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+.footer-section ul li a {
+  color: var(--footerText-Color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-section ul li a:hover {
+  color: var(--accent);
+}
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+.social-icons a{
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  color:  var(--footerText-Color);
+}
+.social-icons a:hover {
+  transform: scale(1.2);
+  filter: brightness(0) invert(0.7) sepia(1) saturate(5) hue-rotate(330deg);
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.Developer p{
+    line-height: 2.5;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-section {
+    flex: 1 1 100%;
+  }
+.footer-section.brand {
+  padding-right: 0;
+  padding-bottom: 20px;
+  margin-left: 0;
+}
+  .social-icons {
+    justify-content: center;
+  }
+  .links{
+      padding-bottom: 20px;
+  }
+  .Developer{
+      padding-top: 20px;
+  }
+}

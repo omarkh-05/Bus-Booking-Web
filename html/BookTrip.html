@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/BookTrip.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <title>BookTrip</title>
+</head>
+<body>
+  <div class="dropdown">
+  <input type="checkbox" id="toggle">
+  <label for="toggle" class="btn"><i class="fa-solid fa-gear"></i></label>
+  <div class="menu">
+    <button><i class="fa-solid fa-language"></i></button>
+    <button><i class="fa-solid fa-circle-half-stroke"></i></button>
+  </div>
+</div>
+
+     <header>
+    <nav>
+        <div class="NavHeader" style="padding-bottom: 11px;">
+         <h1>
+           <a href="/index.html">
+           <i class="fa-solid fa-bus" style="color: #e8a411;"></i>
+            MrBus Company</a> 
+         </h1>
+        </div>
+        <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+        </div>
+        <div class="navlinks">
+         <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/html/BookTrip.html">BookTrip</a></li>
+            <li><a href="/html/Services.html">Services</a></li>
+            <li><a href="/html/About.html">About</a></li>
+            <li><a href="/html/MyAccount.html">MyAccount</a></li>
+         </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="tripbookingformsec">
+    <div class="tripbookingform">
+    <h2 style="padding-bottom: 20px;">Book A Trip</h2>
+    
+      <form id="regForm" action="" method="">
+<!-- One "tab" for each step in the form: -->
+<fieldset class="tab">
+  <legend><strong>Trip Type</strong></legend>
+  <label class="form-control">
+    <input type="radio" name="IsInternationa" />International</label>
+  <label class="form-control">
+    <input type="radio" name="IsInternationa" checked />National </label>
+</fieldset>
+<!--<input type="text" list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+
+-->
+<fieldset class="tab">
+  <legend><strong>Customer Info</strong></legend>
+  <div>
+  <label for="TripDate">Trip Date  </label>
+  <input class="make-margins" type="date" name="TripDate" id="TripDate" min="2025-12-26" max="2026-01-01">
+  </div>
+    <div>
+    <label for="TheTrip">The Trip</label>
+  <select class="make-margins" id="TheTrip" name="TheTrip">
+    <option value="Trip">Aqaba-Amman Normal</option>
+  </select>
+  </div>
+  <div>
+   <label for="class">Class</label>
+  <select class="make-margins" id="class" name="class">
+    <option value="Vip">Vip</option>
+     <option value="Normal">Normal</option>
+      <option value="Small">Small</option>
+  </select>
+</div>
+<div>
+   <label for="status">Status</label>
+  <select class="make-margins" id="status" name="status">
+    <option value="OnGoing">On Going</option>
+     <option value="Stopped">Stopped</option>
+      <option value="Soon">Soon</option>
+  </select>
+</div>
+<div>
+   <label for="payment">Payment Method</label>
+  <select class="make-margins" id="payment" name="payment">
+    <option value="Visa">Visa</option>
+    <option value="MasterCard">MasterCard</option>
+    <option value="Qliq">Qliq</option>
+    <option value="Cash">Cash</option>
+  </select>
+</div>
+<div>
+   <label for="phoneNumber">Phone Number</label>
+<input type="tel" id="phoneNumber" name="phone_Number" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required maxlength="12">
+</div>
+<div class="Passengers">
+   <label for="adult">Adult</label>
+  <input class="make-margins" type="number" name="adult" id="adult" max="10" min="1" value="1">
+  <br>
+    <label for="child">Child</label>
+  <input class="make-margins" type="number" name="child" id="child" max="10" min="0" value="0">
+  <br>
+    <label for="disable">Disable</label>
+  <input class="make-margins" type="number" name="disable" id="disable" max="10" min="0" value="0">
+  </div>
+</fieldset>
+
+<fieldset class="tab"> 
+  <legend><strong>Trips List</strong></legend>
+  <h1>Here Will Be The List</h1>
+</fieldset>
+
+<fieldset class="tab">
+  <legend><strong>Complete The Book</strong></legend>
+  <h1>After Complete First Steps We Need To Complete Passengers Info</h1>
+</fieldset>
+
+<div style="overflow:auto;">
+  <div style="text-align: center; padding-bottom: 10px;">
+    <button class="formbtn" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+    <button class="formbtn" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+  </div>
+</div>
+
+<!-- Circles which indicates the steps of the form: -->
+<div style="text-align:center;margin-top:40px;">
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
+
+      </form>
+</div>
+    </section>
+    
+    <section class="personinfo">
+        <H1 style="text-align: center; margin: 50px;">Maybe Here Will Be Passengers Info</H1>
+    </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-section brand">
+      <h4 style="font-size: 25px; padding-bottom: 10px;">MrBus</h4>
+      <p>Your Rest Is Our Proparity</p>
+    </div>
+    <div class="footer-section links">
+      <h4>fast links</h4>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/html/Services.html">Services</a></li>
+        <li><a href="/html/About.html">About</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-section social">
+      <h4>Follow</h4>
+      <div class="social-icons">
+       <a href="#Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#Youtube" aria-label="LinkedIn"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="footer-section Developer">
+      <h4>MrBus Website Developer</h4>
+      <p>Email: <span>omarkyhamed1996@gmail.com</span></p>
+      <address>Address: Jordan - Aqaba</address>
+      <p>Mobile: +962 798 678 036</p>
+      <div class="social-icons">
+          <a href="#Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 MrBus Company. All rights reserved.</p>
+  </div>
+</footer>
+<script src="/js/all.min.js"></script>
+<script src="/js/bookTrip.js"></script>
+</body>
+</html>

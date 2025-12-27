@@ -1,0 +1,770 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+      --NavText-Color-BeforeHover: rgb(77, 77, 77);
+      --NavText-Color-AfterHover: rgb(255, 255, 255);
+     --NavBackground-Color-BeforeHover: rgba(19,31,47,0);
+     --NavBackground-Color-AfterHover: rgba(60, 75, 94, 0.8);
+    --HeaderSectionsTitle-color: rgb(226, 24, 24);
+    --NavLogo-Color: rgb(224, 147, 4);
+    --bodyBack-Color: #fcfcfc;
+    --HeaderNavFont-Size: clamp(1.3rem,1.8vw,5rem);
+    --Navfont-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    --nav-hover-color: orange;
+    --HeaderNavColor-Hover: rgb(230, 34, 34);
+    --ActiveNavBoxShadow : rgba(0,0,0,0.4);
+    --HeroSec-BackColor:radial-gradient(
+        circle at top,#f8ead5 50%, white 20%,transparent);
+    --About-Background:linear-gradient(
+        to right bottom,#f8f0e3 , #c9c7c720 );
+    --contact-Background:linear-gradient(
+        to top left,#fcefdb , #a7a7a720 );
+    --HeroButtonColor:white;
+    --GetStartedButtonBg: red;
+    --SignButtonBg: rgb(27, 27, 27);
+    --reviewsbackground: #f0f0f0;
+    --reviewsgroupBg: rgb(255, 255, 255);
+    --reviewrnameimg: rgb(182, 181, 181); 
+    --ContactBack-Color: #c2c2c2;
+    --feedbackinput-Text: rgb(0, 0, 0);
+    --ink: #111827;
+    --accent: #e17c1d;       /* rose-600 */
+    --accent-ink: #fff5f7;
+    --footerText-Color:#ebebeb ;
+    --office-place:rgba(199, 133, 11, 0.6);
+    --office-place-text : white;
+    --menu-buttonbg: #333;
+    --menu-buttontxt: #fff;
+}
+/* body.dark{
+    --NavText-Color: rgb(0, 0, 0);
+    --NavBackground-Color: #4a5461; 
+}*/
+html{
+ scroll-behavior: smooth; 
+}
+html, body {
+  height: 100%;
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    font-family: "Roboto",sans-serif;
+    background-color: var(--bodyBack-Color);
+    color: rgb(77, 77, 77);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+body h2{
+    font-size: 3rem;
+}body h3{
+    font-size: 3rem;
+}
+body p{
+    font-size: 1.2rem;
+}
+img.drop-shadow-example {
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.dropdown {
+  position: fixed;
+  z-index: 1000;
+  left: 10px;
+  bottom: 20px;
+}
+.fa-gear{
+    color: var(--menu-buttontxt);
+}
+#toggle {
+  display: none;
+}
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--menu-buttonbg);
+  color: var(--menu-buttontxt);
+  cursor: pointer;
+  user-select: none;
+}
+.menu {
+  position: absolute;
+  bottom: 100%;      /* فوق الزر */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+#toggle:checked ~ .menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.menu button:hover {
+  background: #f2f2f2;
+}
+
+
+
+header{
+    background-color:var(--NavBackground-Color-BeforeHover);
+    height: 9%;
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index:1000;
+    transition: all 0.3s ease;
+}/* عند السكرول = نفس لل جافا سكريبن hover  */ 
+header.scrolled{
+    background-color:var(--NavBackground-Color-AfterHover);
+    box-shadow: 0 7px 15px 1px var(--ActiveNavBoxShadow);
+}
+header.scrolled nav a{
+    color:var(--NavText-Color-AfterHover);
+}
+header.scrolled .fa-bars{
+    color: orange;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+nav ul {
+   display: flex;
+   gap: 3vw;
+}
+nav li{
+ display: flex;
+list-style: none;
+}
+nav a{
+    position: relative;
+    color: var(--NavText-Color-BeforeHover);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: var(--Navfont-size);
+      font-weight: 500;
+}
+.navlinks a:hover{
+color :var(--nav-hover-color);
+}
+.navlinks a::after{
+content: '';
+position: absolute;
+left:0;bottom: -4px;
+width: 0;height: 2px;
+background-color:var(--nav-hover-color) ;
+transition: width 0.3s ease;
+}
+.navlinks a:hover::after{
+width: 100%;
+}
+.NavHeader a{
+    color: var(--NavLogo-Color);
+    font-size: var(--HeaderNavFont-Size);
+     font-weight: 800;
+}
+.NavHeader{
+    transition: all 0.2s ease;
+}
+.NavHeader:hover{
+   transform:scale(1.03);
+}
+header:hover{
+      background-color:var(--NavBackground-Color-AfterHover);
+     box-shadow: 0 7px 15px 1px var(--ActiveNavBoxShadow);
+}
+header:hover nav a{
+      color:var(--NavText-Color-AfterHover);
+}
+header:hover .fa-bars{
+      color: orange;
+}
+.menu-toggle{
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--NavText-Color-BeforeHover);
+}
+@media (max-width:700px){
+    nav{
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    .navlinks{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        background-color: var(--NavBackground-Color-AfterHover);
+
+        transform: translateY(-20px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            transform 0.45s cubic-bezier(.4,0,.2,1),
+            opacity 0.35s ease,
+            visibility 0.35s ease;
+    }
+    .navlinks ul{
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+    }
+    .navlinks li{
+        padding: 15px 0;
+    }
+    .navlinks a{
+        color: var(--NavText-Color-AfterHover);
+        font-size: 1.1rem;
+        width: 100%;
+    }
+    .menu-toggle{
+        display: block;
+    }
+    /* لما المنيو تفتح */
+    .navlinks.active{
+        transform: translateY(0);
+        opacity: 0.99;
+        visibility: visible;
+        pointer-events: auto;
+    box-shadow: 0 7px 15px 1px var(--ActiveNavBoxShadow);
+    }
+}/* لما منيو الموبايل مفتوحة */
+header.menu-open{
+    background-color: var(--NavBackground-Color-AfterHover);
+}
+/* إلغاء تأثير hover أثناء فتح المنيو */
+header.menu-open:hover{
+    background-color: var(--NavBackground-Color-AfterHover);
+}
+/* تثبيت لون اللينكات */
+header.menu-open nav a{
+    color: var(--NavText-Color-AfterHover);
+}
+header.menu-open .navlinks a::after{
+    width: 0;
+}
+header.menu-open .fa-bars{
+    color: orange;
+}
+.showbg{
+animation: bg linear both;
+animation-timeline: scroll();
+animation-range: 0px 120px; /* أول 120px سكرول */
+}
+@keyframes bg {
+    from{
+        background-color:var(--NavBackground-Color-BeforeHover);
+        transition: background-color 0.3s ease;
+    }
+    to{
+        background-color:var(--NavBackground-Color-AfterHover);
+    }
+}
+
+
+main{
+    flex: 1;
+}
+.Hero-Sec{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 8%;
+    overflow: hidden;
+    background-color:var(--bodyBack-Color);
+}
+.Hero-Sec::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, #f7e9d4 50%, transparent 1%);
+    z-index: 1;
+    animation: circleMove .7s ease-out forwards;
+}
+.Hero-Sec > *{
+    position: relative;
+    z-index: 2;
+}
+@keyframes circleMove {
+    from{
+        transform: scale(0.7) translateY(-70%);
+        opacity: 0.4;
+    }
+    to{
+        transform: scale(1.2) translateY(0);
+        opacity: 1;
+    }
+}
+.Hero-button{
+    width: 140px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    color: var(--HeroButtonColor);
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 7px 14px rgb(0, 0, 0,0.2);
+}
+.Hero-button:hover{
+    scale: 1.02;
+}
+.Started{
+    background-color: var(--GetStartedButtonBg);
+}
+.Sign{
+    background-color: var(--SignButtonBg);
+}
+.right-text p{
+line-height: 3;
+font-size:large;
+}
+@media (max-width:700px) {
+    .Hero-Sec{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .right-text p{
+        line-height: 2;
+        padding: 20px 0;
+    }
+    .Hero-Sec img{
+        width: 100%;
+        padding-bottom: 30px;
+    }
+}
+.showanimation{
+     animation: showtext 2s ease forwards;
+}
+@keyframes showtext {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.Reviews {
+    display: flex;
+    overflow: hidden;
+    margin: 50px 20px 0 20px;
+    padding: 20px 0;
+    position: relative;
+    mask-image: linear-gradient(
+        to right,
+        rgba(0,0,0,0),
+        rgba(0,0,0,1) 15%,
+        rgba(0,0,0,1) 85%,
+        rgba(0,0,0,0)
+    );
+    background-color: var(--reviewsbackground);
+}
+.track {
+    display: flex;
+    gap: 1rem;
+    will-change: transform;
+}
+.TheRev {
+    min-width: 280px;        /* مهم للسير */
+    height: 120px;
+    padding: 20px;
+    flex-shrink: 0;
+    background-color: var(--reviewsgroupBg);
+    border-radius: 15px;
+    box-shadow: 2px 7px 14px var(--ActiveNavBoxShadow);
+}
+/* ---- Review content ---- */
+.ReviewerName {
+    display: flex;
+    align-items: center;
+}
+.ReviewerName p {
+    width: 32px;
+    height: 32px;
+    background-color: var(--reviewrnameimg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px var(--ActiveNavBoxShadow);
+}
+.ReviewerName h4 {
+    padding: 5px 0 0 6px;
+}
+.ReviewerTalk pre {
+    padding-top: 6px;
+    font-size: larger;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-line;
+}
+.ReviewerTalk span {
+    font-size: small;
+}
+
+
+
+.ServiceAndBook{
+    width: 100%;
+    padding-top: 40px;
+}
+.SB-text{ 
+background: url("/Icons/continentfromchat-removebg-preview.png") center/ cover no-repeat;
+background-attachment: fixed;
+margin: 0 10px;
+padding: 40px 0;
+text-align: center;
+mask-image: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0),
+        rgba(0,0,0,1) 10%,
+        rgba(0,0,0,1) 95%,
+        rgba(0,0,0,0)
+    );
+}
+.SB-text h3{
+     color: var(--HeaderSectionsTitle-color);
+    padding-top: 20px;
+}
+.SB-text p{
+font-size: 1.2rem;
+    line-height: 1.7;
+    padding: 0;
+}
+.offices{
+    margin-top: 20px;
+    display: grid;
+     grid-template-columns:repeat(4,minmax(150px,1fr));
+    gap:20px;
+    justify-items: center;
+}
+@media (max-width: 1200px) {
+    .offices{
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+     gap:50px;
+    }
+    
+}
+@media (max-width: 900px)
+{
+    .SB-text h3{
+     color: var(--HeaderSectionsTitle-color);
+    padding-top: 0;
+    }
+.SB-text{ mask-image: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0),
+        rgba(0,0,0,1) 4%,
+        rgba(0,0,0,1) 98%,
+        rgba(0,0,0,0)
+    );
+    }
+}
+.office-place{
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+    box-shadow: 0 7px 17px var(--ActiveNavBoxShadow);
+    color: var(--office-place-text);
+    background-color: var(--office-place);
+}
+
+
+
+.About-Sec {
+    width: 100%;
+    background-color: var(--bodyBack-Color);
+    padding-top: 40px;
+    padding-right: 8%;
+    padding-left: 8%;
+    overflow: hidden; /* مهم مع float */
+       background: var(--About-Background);
+       
+}
+.Left-text {
+   font-size: 1.2rem;
+    line-height: 1.7;
+    padding: 140px 0 40px 0;
+    display: flex;
+    flex-direction: column;
+}
+.Left-text h3{
+    color: var(--HeaderSectionsTitle-color);
+}
+/* الصورة */
+.Info-img {
+    float: right;
+    width: 35%;
+    shape-outside: circle(90%);
+    clip-path: circle(50%);
+}
+.More-Buttons{
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 2vw;
+margin-top: 20px;
+}
+.More-Buttons button{
+    background: linear-gradient(45deg , red,orange);
+}
+@media (max-width: 1200px) {
+    .Left-text {
+   font-size: 1.2rem;
+    line-height: 1.7;
+    padding: 70px 0 40px 0;
+}
+}
+@media (max-width: 900px) {
+    .About-Sec{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .Left-text{
+       align-items: center;
+        padding-left: 0px;
+        padding-top: 30px;
+    }
+    .Info-img{
+        width: 100%;
+    }
+}
+
+
+.contact{
+   width: 100%;
+    padding-top: 40px;
+    padding-right: 8%;
+    padding-left: 8%;
+    overflow: hidden; /* مهم مع float */
+    background: var(--contact-Background);
+}
+.contact-img{
+    float: left;
+    width: 35%;
+    shape-outside: circle(90%);
+    clip-path: circle(50%);
+    padding-top: 50px;
+}
+.Contact-Container-text h3{
+    color: var(--HeaderSectionsTitle-color);
+    padding-top: 20px;
+}
+.Contact-Container-text p{
+   font-size: 1.2rem;
+    line-height: 1.7;
+    padding: 0;
+}
+.contact-container{
+  max-width: 50vw;
+  margin: 0 auto;
+  padding:20px 20px;
+  text-align: center;
+  color: var(--accent-ink);
+}
+.contact-form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.feedback-input {
+  color:var(--feedbackinput-Text);
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color: transparent;
+  border:2px solid #CC6666;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+@media (max-width:900px) {
+    .Contact-Container-text{
+        text-align: center;
+    }
+  .contact-container{max-width: 75vw;}
+  .contact-img{
+    display: none;
+  }
+}
+.feedback-input:focus { border:2px solid #CC4949; }
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+}
+[type="submit"] {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 100%;
+  background:#df3b3b;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:24px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+[type="submit"]:hover { background:#b43a3a; }
+
+
+
+.autoshow {
+    opacity: 0;
+    transform: translateY(120px);
+    transition: all 0.8s ease-out;
+}
+.autoshow.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+.site-footer {
+  background-color: #1b1b1b;
+  color: var(--footerText-Color);
+  padding: 40px 20px 20px;
+  font-family: Segoe UI, Roboto, Arial, sans-serif;
+}
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-items: center;
+  min-width: 70vw;
+}
+.footer-section {
+  flex: 1 1 200px; /* مرن حسب الشاشة */
+  opacity: 0.90;
+}
+.footer-section.brand {
+  display: flex;
+  flex-direction: column; /* هذا يجعل النص تحت العنوان */
+  align-items: center; /* أو center حسب رغبتك */
+  justify-content: center;
+  padding-right: 250px;
+  margin-left: 30px;
+}
+.footer-section.brand h2 {
+  margin: 10px 0;
+  font-size: 1.8rem;
+  opacity: 0.8;
+}
+.footer-section.brand p {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+.footer-section h4{
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+.footer-section ul li a {
+  color: var(--footerText-Color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-section ul li a:hover {
+  color: var(--accent);
+}
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+.social-icons a{
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  color:  var(--footerText-Color);
+}
+.social-icons a:hover {
+  transform: scale(1.2);
+  filter: brightness(0) invert(0.7) sepia(1) saturate(5) hue-rotate(330deg);
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.Developer p{
+    line-height: 2.5;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-section {
+    flex: 1 1 100%;
+  }
+.footer-section.brand {
+  padding-right: 0;
+  padding-bottom: 20px;
+  margin-left: 0;
+}
+  .social-icons {
+    justify-content: center;
+  }
+  .links{
+      padding-bottom: 20px;
+  }
+  .Developer{
+      padding-top: 20px;
+  }
+}
