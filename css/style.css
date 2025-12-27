@@ -440,7 +440,7 @@ font-size:large;
     padding-top: 40px;
 }
 .SB-text{ 
-background: url("/Icons/continentfromchat-removebg-preview.png") center/ cover no-repeat;
+background: url("../Icons/continentfromchat-removebg-preview.png") center/ cover no-repeat;
 background-attachment: fixed;
 margin: 0 10px;
 padding: 40px 0;
