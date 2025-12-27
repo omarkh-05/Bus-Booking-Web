@@ -10,37 +10,19 @@
      --NavBackground-Color-AfterHover: rgba(60, 75, 94, 0.8);
     --HeaderSectionsTitle-color: rgb(226, 24, 24);
     --NavLogo-Color: rgb(224, 147, 4);
-    --bodyBack-Color: rgb(238, 238, 238);
+    --bodyBack-Color: #fcfcfc;
     --HeaderNavFont-Size: clamp(1.3rem,1.8vw,5rem);
     --Navfont-size: clamp(0.9rem, 1.2vw, 1.1rem);
     --nav-hover-color: orange;
     --HeaderNavColor-Hover: rgb(230, 34, 34);
     --ActiveNavBoxShadow : rgba(0,0,0,0.4);
-      --accent: #e17c1d;       /* rose-600 */
+    --accent: #e17c1d;       /* rose-600 */
     --accent-ink: #fff5f7;
     --footerText-Color:#ebebeb ;
-    --bg: #f8f7f3;             /* paper-ish */
-      --ink: #1f2328;
-      --muted: #6b7280;
-      --surface: #ffffff;
-      --rule: #e5e7eb;
-      --radius: 14px;
-      --shadow: 0 10px 24px rgba(0,0,0,.10);
-      --maxw: 1180px;
-      --gutter: 2.2rem;          /* column gutter */
-       --menu-buttonbg: #333;
+     --menu-buttonbg: #333;
     --menu-buttontxt: #fff;
 }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg: #0d1014;
-        --ink: #e6e8ec;
-        --muted: #9aa2b2;
-        --surface: #171c23;
-        --rule: #242b36;
-        --shadow: 0 16px 36px rgba(0,0,0,.55);
-      }
-}
+
 html{
     scroll-behavior: smooth;
 }
@@ -49,10 +31,9 @@ html, body {
 }
 body{
     font-family: "Roboto",sans-serif;
-    background-color:var(--bodyBack-Color);
+    background-color: var(--bodyBack-Color);
     color: var(--NavText-Color-BeforeHover);
     font-weight: 500;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -63,7 +44,11 @@ body h2{
 }
 body p{
     font-size: 1.2rem;
-}.dropdown {
+}
+img.drop-shadow-example {
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+}
+.dropdown {
   position: fixed;
   z-index: 1000;
   left: 10px;
@@ -119,7 +104,7 @@ body p{
 
 header{
     background-color:var(--NavBackground-Color-BeforeHover);
-    height: 9%;
+    height: 60px;
     position:fixed;
     top: 0;
     left: 0;
@@ -158,7 +143,7 @@ nav a{
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: var(--Navfont-size);
-      font-weight: 500;
+    font-weight: 500;
 }
 .navlinks a:hover{
 color :var(--nav-hover-color);
@@ -267,184 +252,91 @@ header.menu-open .fa-bars{
 }
 
 
-
-main {
-    flex: 1; /* هذا السر */
+main{
+  flex: 1;
 }
-.masthead{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:1rem;
+.About-Sec {
+    width: 100%;
+    height: 100%;
+    background: url("../Icons/LoginBack.jpg") center/cover no-repeat;
+    background-color: var(--bodyBack-Color);
+    padding: 80px 8% 50px 8%;
+    text-shadow: 0px 7px 15px rgba(0, 0, 0,0.1);
+    display: flex;
+    align-items: center;
+}
+.About-Sec::-webkit-scrollbar{
+    display: none;
+}
+.centersection{
+margin: 10px 0;
+}
+.Left-text {
+    line-height: 1.7;
+    padding: 0 0 40px 0;
+}
+.Left-text h2{
+    color: var(--HeaderSectionsTitle-color);
+}
+/* الصورة */
+.Info-img {
+    float: right;
+    width: 35%;
+    shape-outside: circle(90%);
+    clip-path: circle(50%);
+}
+.More-Buttons{
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 2vw;
+margin-top: 20px;
+}
+.More-Buttons button{
+    background: linear-gradient(45deg , red,orange);
+}
+.Hero-button{
+    width: 140px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+     box-shadow: 0 7px 14px rgb(0, 0, 0,0.2);
+}
+.Hero-button:hover{
+    scale: 1.02;
+}
+@media (max-width: 1200px) {
+    .Left-text {
+    line-height: 1.7;
+    padding: 70px 0 40px 0;
+}
+}
+@media (max-width: 900px) {
+    .About-Sec{
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
     }
-    .logo{
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin: 0;
+    .Left-text{
+       align-items: center;
+        padding-left: 0px;
+        padding-top: 30px;
     }
-    .dek{ margin:.25rem 0 0; color: var(--muted); }
-
-    /* ===== Newspaper Grid via CSS Columns ===== */
-    .sheet{
-      max-width: var(--maxw);
-      margin: 1.25rem auto 2.5rem;
-      padding: 0 1rem;
-      column-count: 3;
-      column-gap: var(--gutter);
+    .Info-img{
+        width: 100%;
     }
-    /* Responsive column counts */
-    @media (max-width: 1200px){ .sheet{ column-count: 2; } }
-    @media (max-width: 780px){ .sheet{ column-count: 1; } .logo{
-      padding-bottom: 30px;} }
-
-    /* Each story block */
-    .story{
-      break-inside: avoid;                    /* keep card intact across columns */
-      -webkit-column-break-inside: avoid;
-      background: var(--surface);
-      border: 1px solid var(--rule);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin: 0 0 1rem;
-      overflow: hidden;
-      height: 600px;
+    .More-Buttons{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 20px;
     }
+}
 
-    .story header{
-      border: 0; padding: 0; margin: 0;
-    }
-
-    .story .thumb{
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .story .pad{
-      padding: 1rem 1rem 1.15rem;
-    }
-
-    .kicker{
-      display:inline-block;
-      font-size: .76rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .45rem;
-    }
-
-    .headline{
-      margin: 0 0 .35rem;
-      font-size: 1.3rem;
-      line-height: 1.22;
-      color: var(--accent);
-    }
-
-    .lede{ margin: 0 0 .8rem; }
-
-    /* Pull quote */
-    .pull{
-      margin: .6rem 0 .9rem;
-      padding: .75rem 1rem;
-      border-left: 4px solid var(--accent);
-      background: rgba(15,118,110,.06);
-      border-radius: 0 10px 10px 0;
-      color: var(--ink);
-      font-style: italic;
-    }
-    @media (prefers-color-scheme: dark){
-      .pull{ background: rgba(45,212,191,.08); }
-    }
-
-    .read-more{
-      display:inline-block;
-      background: var(--accent);
-      color: var(--accent-ink);
-      text-decoration: none;
-      font-weight: 700;
-      padding: .5rem .85rem;
-      border-radius: 999px;
-      box-shadow: 0 8px 18px rgba(15,118,110,.28);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .read-more:hover{ transform: translateY(-2px); box-shadow: 0 12px 22px rgba(15,118,110,.35); }
-
-    /* Small byline/footnote row */
-    .meta{
-      margin-top: .7rem;
-      display:flex; align-items:center; justify-content:space-between; gap:.75rem;
-      color: var(--muted);
-      font-size: .9rem;
-      border-top: 1px dashed var(--rule);
-      padding-top: .6rem;
-    }
-
-    /* ===== Dialogs (full story) ===== */
-    dialog{
-      width: 92%;
-      max-width: 760px;
-      border: none;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      background: var(--surface);
-      color: var(--ink);
-      padding: 2rem;
-      position: relative;
-      text-align: left;
-        margin: auto; /* هذا اللي يسنتره */
-    }
-    dialog::backdrop{ background: rgba(0,0,0,.55); }
-
-    .close-btn{
-      background: none; border: none; cursor: pointer;
-      position: absolute; right: 1rem; top: 1rem;
-      font-size: 1.25rem; color: var(--accent);
-    }
-
-    dialog img{
-      width: 460px; max-width: 100%; height: auto;
-      display: block; margin: 0 auto 1rem;
-      border-radius: 14px;
-    }
-    dialog h2{ margin: .25rem 0 .8rem; line-height: 1.25; }
-    dialog p{ margin: 0 0 1rem; }
-
-    /* Focus styles */
-    a, button{ outline: none; }
-    a:focus-visible, button:focus-visible{
-      box-shadow: 0 0 0 3px rgba(15,118,110,.35), 0 0 0 6px rgba(15,118,110,.15);
-      transition: box-shadow .15s ease;
-    }
-
-    /* ===== Print: only OPEN dialog ===== */
-    @media print{
-      @page{ margin:16mm; }
-      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      html, body{ height:auto !important; overflow:visible !important; }
-
-      body:has(dialog[open]) > :not(dialog[open]){ display:none !important; }
-      dialog:not([open]){ display:none !important; }
-
-      dialog[open]{
-        display:block !important;
-        position: static !important;
-        inset: auto !important;
-        transform:none !important;
-        width:auto !important; max-width:none !important;
-        height:auto !important; max-height:none !important;
-        overflow:visible !important;
-        box-shadow:none !important;
-        padding:0 !important;
-        background: var(--surface) !important;
-      }
-      dialog[open]::backdrop{ display:none !important; }
-
-      .close-btn, .read-more, nav{ display:none !important; }
-      h1, h2, img{ break-inside: avoid; page-break-inside: avoid; }
-      p, li{ orphans:3; widows:3; }
-
-      *{ scrollbar-width:none !important; }
-      *::-webkit-scrollbar{ display:none !important; }
-    }
 
 
 .site-footer {
