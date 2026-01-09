@@ -10,7 +10,7 @@
      --NavBackground-Color-AfterHover: rgba(60, 75, 94, 0.8);
     --HeaderSectionsTitle-color: rgb(226, 24, 24);
     --NavLogo-Color: rgb(224, 147, 4);
-    --bodyBack-Color: #fcfcfc;
+    --bodyBack-Color: #f0f2f5;
     --HeaderNavFont-Size: clamp(1.3rem,1.8vw,5rem);
     --Navfont-size: clamp(0.9rem, 1.2vw, 1.1rem);
     --nav-hover-color: orange;
