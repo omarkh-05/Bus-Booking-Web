@@ -1,0 +1,205 @@
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-green: #10b981;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        html {
+          scroll-behavior: smooth;
+        }
+        html,
+        body {
+          height: 100%;
+        }
+        body {
+          position: relative;
+          min-height: 100vh;
+          font-family: "Roboto", sans-serif;
+          background-color: var(--bodyBack-Color);
+          color: rgb(77, 77, 77);
+          font-weight: 500;
+          display: flex;
+          flex-direction: column;
+        }
+        .Layout {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            margin: 100px 0;
+        }
+
+        .spinner {
+            border: 10px solid #f3f3f3; /* Light grey border */
+            border-top: 10px solid #3498db; /* Blue top border (the moving part) */
+            border-radius: 50%; /* Make it a circle */
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite; /* Apply the spin animation */
+        }
+        
+        /* Keyframe animation for spinning */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* حاوية البطاقة مع التحكم في العرض المطلوب */
+        .trip-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            
+            /* Responsive Width Rules */
+            width: 75%; /* العرض للشاشات الكبيرة */
+            max-width: 1000px;
+            direction: ltr; /* لضمان بقاء المعلومات يسار والزر يمين حسب طلبك */
+        }
+
+        .trip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* القسم الأيسر: المعلومات */
+        .info-section {
+            flex: 1;
+            text-align: left; /* محاذاة النص لليسار */
+        }
+
+        .trip-header {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #tripName {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .trip-status {
+            font-size: 0.85rem;
+            background: #ecfdf5;
+            color: var(--accent-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid #d1fae5;
+        }
+        .done{
+            background: #ecfdf5;
+            color: var(--accent-green);
+        }
+        .soon{
+            background: #2563eb;
+            color: #cccccc;
+        }
+        .ongoing{
+             background: #f59e0b;
+            color: #cccccc;
+        }
+        .stopped{
+            background: #ef4444;
+             color: #cccccc;
+        }
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-item b {
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            opacity: 0.7;
+        }
+
+        .info-item span {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        /* القسم الأيمن: الزر */
+        .action-section {
+            margin-left: 40px;
+        }
+
+        .tickets-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .tickets-button:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        /* تحسينات للهواتف */
+        @media (max-width: 768px) {
+            .trip-card {
+                width: 90%; /* العرض للهواتف */
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+
+            .info-section {
+                text-align: center;
+                width: 100%;
+            }
+
+            .trip-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-section {
+                margin-left: 0;
+                margin-top: 25px;
+                width: 100%;
+            }
+
+            .tickets-button {
+                width: 100%;
+            }
+
+            .booking-grid {
+                grid-template-columns: 1fr 1fr;
+                text-align: left;
+            }
+        }

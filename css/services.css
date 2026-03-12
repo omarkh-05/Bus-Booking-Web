@@ -53,8 +53,9 @@ body{
     color: var(--NavText-Color-BeforeHover);
     font-weight: 500;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+;
 }
 body h2{
     font-size: 3rem;
@@ -119,7 +120,7 @@ body p{
 
 header{
     background-color:var(--NavBackground-Color-BeforeHover);
-    height: 9%;
+    height: 60px;
     position:fixed;
     top: 0;
     left: 0;

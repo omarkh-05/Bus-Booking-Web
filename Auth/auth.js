@@ -1,0 +1,231 @@
+// auth.js
+//export let accessToken = null;
+
+export const UrlBase = "https://localhost:7018/api/";
+
+// ----------------------
+// Register function
+// ----------------------
+export async function registerHelper(regInfoObject) {
+  try {
+    const response = await fetch(`${UrlBase}Auth/Register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(regInfoObject)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Register failed");
+    }
+
+    return data;
+
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+}
+
+// ----------------------
+// Login function
+// ----------------------
+export async function loginHelper(Credentials) {
+  try {
+    const response = await fetch(`${UrlBase}Auth/Login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // مهم للكوكي HttpOnly
+      body: JSON.stringify(Credentials)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Login failed");
+    }
+
+    sessionStorage.setItem("accessToken", data.accessToken);
+    document.cookie = `phoneNumber=${Credentials.PhoneNumber}; max-age=604800; path=/; secure`; 
+    
+    return data;
+
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+}
+// ----------------------
+// Refresh token
+// ----------------------
+export async function refreshAccessToken(phoneNumber) {
+  try {
+    const response = await fetch(`${UrlBase}Auth/Refresh`, {
+      method: "POST",
+      credentials: "include",
+       headers: {"Content-Type": "application/json"},
+       body: JSON.stringify({ PhoneNumber: phoneNumber })
+    });
+
+    if (!response.ok) {
+      sessionStorage.removeItem("accessToken");
+      throw new Error("Refresh token expired");
+    }
+
+    const data = await response.json();
+   sessionStorage.setItem("accessToken", data.accessToken);
+    return data.accessToken;
+
+  } catch (error) {
+    console.error(error.message);
+    document.cookie = "phoneNumber=; max-age=0; path=/";
+    sessionStorage.removeItem("accessToken");
+    return null;
+  }
+}
+
+export async function checkAuth(page) {
+  try {
+    const res = await apiFetch(`BusBookingRest/MyProfile`, {
+      method: "GET"
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Error:", errorText);
+      if(page)
+   showGuestUI(page)
+
+   return null;
+    }
+    const customer = await res.json();
+    if(page)
+    showUserUI(page,customer);
+    return customer;
+  } catch (err) {
+    if(page)
+    showGuestUI(page)
+    console.error(err);
+    return null;
+  }
+}
+
+export async function Logout() {
+  setLoading(true,"Logging Out...");
+    try {
+        const phoneNumber = getCookie("phoneNumber");
+
+        await apiFetch("Auth/Logout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phoneNumber })
+        });
+
+    } catch (err) {
+      setLoading(false);
+        console.error("Logout request failed", err);
+    }
+
+    forceLogout();
+}
+
+// ----------------------
+// API wrapper to include access token and handle refresh بدل ما نسوي اللوجيك كل مرة في كل مكان نستخدم فيه الفيتش
+// ----------------------
+export async function apiFetch(url, options = {}) {
+  try{
+    options.headers = options.headers || {};
+    options.credentials = "include";
+    const token = sessionStorage.getItem("accessToken");
+    if (token) {
+        options.headers["Authorization"] = `Bearer ${token}`;
+    }
+    let response = await fetch(`${UrlBase}${url}`, options);
+
+    if (response.status === 401) {
+        log("Access token expired → attempting refresh");
+        const phoneNumber = getCookie("phoneNumber");
+        if (!phoneNumber) {
+            log("Refresh aborted → phoneNumber cookie missing");
+            forceLogout();
+            return response;
+        }
+        const newToken = await refreshAccessToken(phoneNumber);
+        if (!newToken) {
+            log("Refresh failed → user logged out");
+            forceLogout();
+            return response;
+        }
+        log("Refresh succeeded → retrying request");
+        options.headers["Authorization"] = `Bearer ${newToken}`;
+        response = await fetch(`${UrlBase}${url}`, options);
+    }
+
+    return response;
+  }catch(ex)
+  {
+    console.error(ex);
+    return null;
+  }
+}
+
+
+// ----------------------
+// Helper to get cookie
+// ----------------------
+export function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+function showUserUI(page,customer) {
+  const accountLink = document.getElementById("myAccountLink");
+  accountLink.textContent = getFirstWord(customer.fullName);
+  accountLink.href = "../html/Profile.html";
+  if(page === "home"){
+  const btnLoginHerolink = document.getElementById("btnLoginHero-link");
+  const btnLoginHerotext = document.getElementById("btnLoginHero-text");
+  btnLoginHerolink.href = "../html/Profile.html";
+  btnLoginHerotext.textContent = "My Account";
+  }
+}
+function showGuestUI(page) {
+  const accountLink = document.getElementById("myAccountLink");
+  accountLink.textContent = "MyAccount";
+  accountLink.href = "../html/Login.html";
+  if(page === "home"){
+  const btnLoginHerolink = document.getElementById("btnLoginHero-link");
+  const btnLoginHerotext = document.getElementById("btnLoginHero-text");
+  btnLoginHerolink.href = "../html/Login.html";
+  btnLoginHerotext.textContent = "Login";
+}
+}
+function getFirstWord(str) {
+  if (!str) return null;
+  const index = str.indexOf(" ");
+  return index === -1 ? str : str.slice(0, index);
+}
+function log(message, data = null) {
+    const time = new Date().toISOString();
+    console.log(`[API ${time}] ${message}`, data || "");
+}
+function forceLogout() {
+    sessionStorage.removeItem("accessToken");
+    document.cookie = "phoneNumber=; max-age=0; path=/";
+    window.location.href = "../index.html";
+}
+export function setLoading(isLoading,message) {
+const loading = document.getElementById("loading");
+const editbtn = document.getElementById("btnEditProfil");
+const loding_message = document.getElementById("loading-Message")
+
+  if(isLoading){
+  loading.style.display ="flex";
+  loding_message.textContent = message;
+  editbtn.disabled = true;
+  }else{
+    loading.style.display ="none";
+    editbtn.disabled = false;
+}
+}
