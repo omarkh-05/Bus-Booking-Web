@@ -195,7 +195,7 @@ function showUserUI(page, customer) {
   if (accountLink) {
     accountLink.textContent = getFirstWord(customer.fullName);
     
-    accountLink.href = isSubPage ? "./profile.html" : "html/profile.html";
+    accountLink.href = isSubPage ? "profile.html" : "html/profile.html";
   }
 
   if (page === "home") {
