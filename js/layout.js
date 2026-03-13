@@ -11,8 +11,13 @@ async function loadComponent(selector, url) {
 
 const accesstoken = sessionStorage.getItem("accessToken");
 async function initLayout() {
-  await loadComponent("#header", "../components/Header.html");
-  await loadComponent("#footer", "../components/Footer.html");
+  const isSubPage = window.location.pathname.includes("/html/");
+    const prefix = isSubPage ? "../" : "./";
+
+    console.log("Current Prefix:", prefix); // للتأكد في الكونسول
+
+    await loadComponent("#header", `${prefix}components/Header.html`);
+    await loadComponent("#footer", `${prefix}components/Footer.html`);
   //await loadComponent("#settings", "../components/Settings.html");
       if(accesstoken) {
          try {
