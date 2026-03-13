@@ -53,13 +53,16 @@ document.getElementById("btnLogout").addEventListener("click",async () => {
    await Logout();
 });
 
-
+const getCommonHeaders = () => ({
+    "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
+});
 // ========= Api Fetch Helpers =========
 async function FetchCountryName(countryId) {
    try {
       const response = await fetch(`${UrlBase}BusBookingRest/GetCountrNameById/${countryId}`, {
          method: "GET",
-         headers: { "Content-Type": "application/json" }
+         headers: getCommonHeaders()
       });
       if(!response.ok)
          { 

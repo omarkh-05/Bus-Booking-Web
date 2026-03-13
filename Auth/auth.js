@@ -1,8 +1,11 @@
 // auth.js
 //export let accessToken = null;
 
-export const UrlBase = "https://localhost:7018/api/";
-
+export const UrlBase = "https://professionally-overjocular-chelsie.ngrok-free.dev/api/";
+const getCommonHeaders = () => ({
+    "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
+});
 // ----------------------
 // Register function
 // ----------------------
@@ -10,7 +13,7 @@ export async function registerHelper(regInfoObject) {
   try {
     const response = await fetch(`${UrlBase}Auth/Register`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getCommonHeaders(), // تم إضافة التعديل هنا
       body: JSON.stringify(regInfoObject)
     });
 
@@ -35,7 +38,7 @@ export async function loginHelper(Credentials) {
   try {
     const response = await fetch(`${UrlBase}Auth/Login`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getCommonHeaders(), // تم إضافة التعديل هنا
       credentials: "include", // مهم للكوكي HttpOnly
       body: JSON.stringify(Credentials)
     });
@@ -64,7 +67,7 @@ export async function refreshAccessToken(phoneNumber) {
     const response = await fetch(`${UrlBase}Auth/Refresh`, {
       method: "POST",
       credentials: "include",
-       headers: {"Content-Type": "application/json"},
+       headers: getCommonHeaders(), // تم إضافة التعديل هنا
        body: JSON.stringify({ PhoneNumber: phoneNumber })
     });
 
@@ -134,8 +137,12 @@ export async function Logout() {
 // ----------------------
 export async function apiFetch(url, options = {}) {
   try{
-    options.headers = options.headers || {};
+    options.headers = {
+      ...getCommonHeaders(),
+      ...options.headers
+    };
     options.credentials = "include";
+    
     const token = sessionStorage.getItem("accessToken");
     if (token) {
         options.headers["Authorization"] = `Bearer ${token}`;
