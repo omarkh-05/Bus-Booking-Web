@@ -2,6 +2,7 @@
 //export let accessToken = null;
 
 export const UrlBase = "https://professionally-overjocular-chelsie.ngrok-free.dev/api/";
+
 const getCommonHeaders = () => ({
     "Content-Type": "application/json",
     "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
@@ -189,22 +190,22 @@ export function getCookie(name) {
 function showUserUI(page,customer) {
   const accountLink = document.getElementById("myAccountLink");
   accountLink.textContent = getFirstWord(customer.fullName);
-  accountLink.href = "../html/Profile.html";
+  accountLink.href = "../html/profile.html";
   if(page === "home"){
   const btnLoginHerolink = document.getElementById("btnLoginHero-link");
   const btnLoginHerotext = document.getElementById("btnLoginHero-text");
-  btnLoginHerolink.href = "../html/Profile.html";
+  btnLoginHerolink.href = "../html/profile.html";
   btnLoginHerotext.textContent = "My Account";
   }
 }
 function showGuestUI(page) {
   const accountLink = document.getElementById("myAccountLink");
   accountLink.textContent = "MyAccount";
-  accountLink.href = "../html/Login.html";
+  accountLink.href = "../html/login.html";
   if(page === "home"){
   const btnLoginHerolink = document.getElementById("btnLoginHero-link");
   const btnLoginHerotext = document.getElementById("btnLoginHero-text");
-  btnLoginHerolink.href = "../html/Login.html";
+  btnLoginHerolink.href = "../html/login.html";
   btnLoginHerotext.textContent = "Login";
 }
 }
