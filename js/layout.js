@@ -11,22 +11,23 @@ async function loadComponent(selector, url) {
 
 const accesstoken = sessionStorage.getItem("accessToken");
 async function initLayout() {
-  const isSubPage = window.location.pathname.includes("/html/");
-    const prefix = isSubPage ? "../" : "./";
+  // هذا السطر يحدد اسم المستودع (Repository) إذا كان موجوداً في الرابط
+  // لأن GitHub Pages يضع المشروع في مسار فرعي مثل /MrBus-Project/
+  const repoName = window.location.hostname.includes("github.io") 
+                   ? `/${window.location.pathname.split('/')[1]}` 
+                   : "";
 
-    console.log("Current Prefix:", prefix); // للتأكد في الكونسول
+  // الآن نبني المسار ليكون دائماً من جذر الموقع
+  const headerPath = `${repoName}/components/header.html`;
+  const footerPath = `${repoName}/components/footer.html`;
 
-    await loadComponent("#header", `${prefix}components/header.html`);
-    await loadComponent("#footer", `${prefix}components/footer.html`);
-  //await loadComponent("#settings", "../components/Settings.html");
-      if(accesstoken) {
-         try {
-            await checkAuth("layout");
-         } catch(e) {
-            console.error("Auth check failed", e);
-         }
-      }
+  console.log("Fetching Header from:", headerPath);
+  console.log("Fetching Footer from:", footerPath);
 
+  await loadComponent("#header", headerPath);
+  await loadComponent("#footer", footerPath);
+
+  // تشغيل باقي الدوال
   initHeader();
   initTrack();
   initScroll();
