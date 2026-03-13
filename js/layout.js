@@ -13,7 +13,7 @@ const accesstoken = sessionStorage.getItem("accessToken");
 async function initLayout() {
   await loadComponent("#header", "../components/Header.html");
   await loadComponent("#footer", "../components/Footer.html");
-  //await loadComponent("#settings", "/components/Settings.html");
+  //await loadComponent("#settings", "../components/Settings.html");
       if(accesstoken) {
          try {
             await checkAuth("layout");

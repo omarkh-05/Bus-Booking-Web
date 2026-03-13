@@ -1,4 +1,4 @@
-import { loginHelper, registerHelper} from "../Auth/auth.js";
+import { loginHelper, registerHelper , UrlBase} from "../Auth/auth.js";
 
 const container = document.querySelector(".container"),
   pwShowHide = document.querySelectorAll(".showHidePw"),
@@ -40,7 +40,6 @@ login.addEventListener("click", (e) => {
 
 
 // Register / Login form Logic
-const UrlBase = "https://localhost:7018/api/";
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -65,7 +64,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
   };
   if(await registerHelper(regInfoObject)){
     setLoading(false);
-    window.location.href = "/html/Login.html";
+    window.location.href = "../html/Login.html";
   } else {
     setLoading(false);
     printValidateErrorMessage("Register", " An error occurred during registration. Please try again.");
