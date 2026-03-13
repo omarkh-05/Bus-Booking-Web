@@ -64,7 +64,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
   };
   if(await registerHelper(regInfoObject)){
     setLoading(false);
-    window.location.href = "../html/Login.html";
+    window.location.href = "../html/login.html";
   } else {
     setLoading(false);
     printValidateErrorMessage("Register", " An error occurred during registration. Please try again.");

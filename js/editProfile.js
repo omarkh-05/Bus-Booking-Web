@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const customer = await checkAuth();
     if (!customer) {
        const currentUrl = window.location.pathname + window.location.search;
-        window.location.href = `../html/Login.html?redirect=${encodeURIComponent(currentUrl)}`;
+        window.location.href = `../html/login.html?redirect=${encodeURIComponent(currentUrl)}`;
         return;
     }
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         emailInput.value = customer.email || "";
         description.value = customer.discription || "";
 
-        const API_BASE = "https://localhost:7018";
+        const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
 
         if (customer.imgUrl) {
          avatarPreview.src = API_BASE + customer.imgUrl;
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // ======================
     function closeModal() {
         successModal.classList.add("hidden");
-        window.location.href = "../html/Profile.html";
+        window.location.href = "../html/profile.html";
     }
     closeModalBtn.addEventListener("click", closeModal);
     successModal.addEventListener("click", closeModal);

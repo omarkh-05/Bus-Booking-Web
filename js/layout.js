@@ -16,8 +16,8 @@ async function initLayout() {
 
     console.log("Current Prefix:", prefix); // للتأكد في الكونسول
 
-    await loadComponent("#header", `${prefix}components/Header.html`);
-    await loadComponent("#footer", `${prefix}components/Footer.html`);
+    await loadComponent("#header", `${prefix}components/header.html`);
+    await loadComponent("#footer", `${prefix}components/footer.html`);
   //await loadComponent("#settings", "../components/Settings.html");
       if(accesstoken) {
          try {

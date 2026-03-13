@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const card = this.closest('.trip-card');// الكلوزيت بتجيب العنصر نفسه الماتش بس بتعطي ترو او فولز
         //  const bookingId = this.closest('.trip-card').dataset.bookingid;
         const bookingId = card.dataset.bookingid;
-        window.location.href = `Tickets.html?bookingId=${bookingId}`;
+        window.location.href = `tickets.html?bookingId=${bookingId}`;
     });
     });
     }

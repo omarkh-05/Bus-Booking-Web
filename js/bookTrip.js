@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async function () {
        if(!customer) 
        {
         const currentUrl = window.location.pathname + window.location.search;
-         window.location.href = `../html/Login.html?redirect=${encodeURIComponent(currentUrl)}`;
+         window.location.href = `../html/login.html?redirect=${encodeURIComponent(currentUrl)}`;
         return;
         }
         else{

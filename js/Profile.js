@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if(!customer) 
   {
    const currentUrl = window.location.pathname + window.location.search;
-    window.location.href = `../html/Login.html?redirect=${encodeURIComponent(currentUrl)}`;
+    window.location.href = `../html/login.html?redirect=${encodeURIComponent(currentUrl)}`;
    return;
    }  
    const customerCountryName = await FetchCountryName(customer.countryId);
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
    const testimg = document.getElementById("testimg");
 
-  const API_BASE = "https://localhost:7018";
+  const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
   const imgUrl = API_BASE + customerProfilePicture;
       console.log(imgUrl);
       
