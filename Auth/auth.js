@@ -188,20 +188,25 @@ export function getCookie(name) {
   return null;
 }
 function showUserUI(page, customer) {
+  // فحص هل نحن في مجلد html أم لا
   const isSubPage = window.location.pathname.includes("/html/");
-  const prefix = isSubPage ? "" : "html/"; // إذا كنت في الإندكس أضف html/ أما إذا كنت في صفحة فرعية فلا تضف شيئاً للروابط التي تشير لنفس المجلد
 
   const accountLink = document.getElementById("myAccountLink");
-  accountLink.textContent = getFirstWord(customer.fullName);
-  
-  // تصحيح الرابط: إذا كنت في الإندكس يروح لـ html/profile، إذا كنت في البروفايل يضل في profile
-  accountLink.href = isSubPage ? "profile.html" : "html/profile.html";
+  if (accountLink) {
+    accountLink.textContent = getFirstWord(customer.fullName);
+    
+    accountLink.href = isSubPage ? "./profile.html" : "html/profile.html";
+  }
 
-  if(page === "home"){
+  if (page === "home") {
     const btnLoginHerolink = document.getElementById("btnLoginHero-link");
     const btnLoginHerotext = document.getElementById("btnLoginHero-text");
-    btnLoginHerolink.href = "html/profile.html"; // الإندكس دائماً يحتاج html/
-    btnLoginHerotext.textContent = "My Account";
+    
+    if (btnLoginHerolink && btnLoginHerotext) {
+      // بما أن الـ page هو home، فنحن بالتأكيد في index.html
+      btnLoginHerolink.href = "html/profile.html"; 
+      btnLoginHerotext.textContent = "My Account";
+    }
   }
 }
 
