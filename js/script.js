@@ -10,7 +10,7 @@ const loginbtn = document.getElementById("btnLoginHero-text");
     if(loginbtn)
         loginbtn.addEventListener("click",() => {
             const currentUrl = window.location.pathname + window.location.search;
-            window.location.href = `/html/login.html?redirect=${encodeURIComponent(currentUrl)}`;
+            window.location.href = `html/login.html?redirect=${encodeURIComponent(currentUrl)}`;
         });
 
 });
