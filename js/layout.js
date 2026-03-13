@@ -18,8 +18,8 @@ async function initLayout() {
                    : "";
 
   // الآن نبني المسار ليكون دائماً من جذر الموقع
-  const headerPath = `${repoName}/components/header.html`;
-  const footerPath = `${repoName}/components/footer.html`;
+  const headerPath = `/components/header.html`;
+  const footerPath = `/components/footer.html`;
 
   console.log("Fetching Header from:", headerPath);
   console.log("Fetching Footer from:", footerPath);
