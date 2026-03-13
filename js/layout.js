@@ -12,13 +12,23 @@ async function loadComponent(selector, url) {
 const accesstoken = sessionStorage.getItem("accessToken");
 async function initLayout() {
   const isSubPage = window.location.pathname.includes("/html/");
-    const prefix = isSubPage ? "../" : "./";
+  const prefix = isSubPage ? "../" : "./";
 
-    console.log("Current Prefix:", prefix); // للتأكد في الكونسول
+  await loadComponent("#header", `${prefix}components/header.html`);
+  await loadComponent("#footer", `${prefix}components/footer.html`);
 
-    await loadComponent("#header", `${prefix}components/header.html`);
-    await loadComponent("#footer", `${prefix}components/footer.html`);
-  //await loadComponent("#settings", "../components/Settings.html");
+  // --- كود تصحيح الروابط بداخل الهيدر بعد تحميله ---
+  const navLinks = document.querySelectorAll("#header a, #footer a");
+  navLinks.forEach(link => {
+      let href = link.getAttribute("href");
+      
+      // إذا كنا في الصفحة الرئيسية (index)، نعدل الروابط التي تبدأ بـ ../
+      if (!isSubPage && href.startsWith("../")) {
+          link.setAttribute("href", href.replace("../", ""));
+      }
+      
+      // إذا كنا في صفحة فرعية (SubPage)، نترك الروابط التي تبدأ بـ ../ كما هي
+  });
       if(accesstoken) {
          try {
             await checkAuth("layout");
