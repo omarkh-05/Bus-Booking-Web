@@ -187,27 +187,37 @@ export function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
   return null;
 }
-function showUserUI(page,customer) {
+function showUserUI(page, customer) {
+  const isSubPage = window.location.pathname.includes("/html/");
+  const prefix = isSubPage ? "" : "html/"; // إذا كنت في الإندكس أضف html/ أما إذا كنت في صفحة فرعية فلا تضف شيئاً للروابط التي تشير لنفس المجلد
+
   const accountLink = document.getElementById("myAccountLink");
   accountLink.textContent = getFirstWord(customer.fullName);
-  accountLink.href = "../html/profile.html";
+  
+  // تصحيح الرابط: إذا كنت في الإندكس يروح لـ html/profile، إذا كنت في البروفايل يضل في profile
+  accountLink.href = isSubPage ? "profile.html" : "html/profile.html";
+
   if(page === "home"){
-  const btnLoginHerolink = document.getElementById("btnLoginHero-link");
-  const btnLoginHerotext = document.getElementById("btnLoginHero-text");
-  btnLoginHerolink.href = "../html/profile.html";
-  btnLoginHerotext.textContent = "My Account";
+    const btnLoginHerolink = document.getElementById("btnLoginHero-link");
+    const btnLoginHerotext = document.getElementById("btnLoginHero-text");
+    btnLoginHerolink.href = "html/profile.html"; // الإندكس دائماً يحتاج html/
+    btnLoginHerotext.textContent = "My Account";
   }
 }
+
 function showGuestUI(page) {
+  const isSubPage = window.location.pathname.includes("/html/");
+  
   const accountLink = document.getElementById("myAccountLink");
   accountLink.textContent = "MyAccount";
-  accountLink.href = "../html/login.html";
+  accountLink.href = isSubPage ? "login.html" : "html/login.html";
+
   if(page === "home"){
-  const btnLoginHerolink = document.getElementById("btnLoginHero-link");
-  const btnLoginHerotext = document.getElementById("btnLoginHero-text");
-  btnLoginHerolink.href = "../html/login.html";
-  btnLoginHerotext.textContent = "Login";
-}
+    const btnLoginHerolink = document.getElementById("btnLoginHero-link");
+    const btnLoginHerotext = document.getElementById("btnLoginHero-text");
+    btnLoginHerolink.href = "html/login.html";
+    btnLoginHerotext.textContent = "Login";
+  }
 }
 function getFirstWord(str) {
   if (!str) return null;
@@ -221,7 +231,9 @@ function log(message, data = null) {
 function forceLogout() {
     sessionStorage.removeItem("accessToken");
     document.cookie = "phoneNumber=; max-age=0; path=/";
-    window.location.href = "../index.html";
+    // تحديد المسار بناءً على مكانك الحالي
+    const isSubPage = window.location.pathname.includes("/html/");
+    window.location.href = isSubPage ? "../index.html" : "index.html";
 }
 export function setLoading(isLoading,message) {
 const loading = document.getElementById("loading");
