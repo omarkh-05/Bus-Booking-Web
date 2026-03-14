@@ -29,6 +29,14 @@ async function initLayout() {
       
       // إذا كنا في صفحة فرعية (SubPage)، نترك الروابط التي تبدأ بـ ../ كما هي
   });
+  // داخل layout.js في دالة initLayout
+const loginLink = document.getElementById("myAccountLink");
+
+if (loginLink) {
+    // إذا بالصفحة الرئيسية، اللوجن جوا مجلد html
+    // إذا بصفحة فرعية، اللوجن معه بنفس المجلد
+    loginLink.href = isSubPage ? "login.html" : "html/login.html";
+}
       if(accesstoken) {
          try {
             await checkAuth("layout");
