@@ -538,11 +538,15 @@ function openPopup() {
 
 
 // ================= API Helper Functions =================
+const getCommonHeaders = () => ({
+    "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
+});
 async function FetchInternationalTrips() {
   try {
     const response = await fetch(`${UrlBase}BusBookingRest/GetInternationalTrips`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: getCommonHeaders()
     });
     if(!response.ok)
       { 
@@ -559,7 +563,7 @@ async function FetchINationalTrips() {
   try {
     const response = await fetch(`${UrlBase}BusBookingRest/GetNationalTrips`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: getCommonHeaders()
     });
     if(!response.ok)
       { 
@@ -576,7 +580,7 @@ async function FetchTripTimes(tripTimeId) {
   try {
     const response = await fetch(`${UrlBase}BusBookingRest/GetAllTripTimes/${tripTimeId}`, {
         method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: getCommonHeaders()
     });
     if(!response.ok)
       { 
@@ -593,7 +597,7 @@ async function FetchbookedSeatsArray(tripId) {
   try {
     const response = await fetch(`${UrlBase}BusBookingRest/GetbookedSeats/${tripId}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: getCommonHeaders()
     });
     if(!response.ok)
       { 
@@ -611,7 +615,7 @@ async function FetchTotalTripAmount(TotalAmountDTO) {
   try {
     const response = await fetch(`${UrlBase}BusBookingRest/GetMoneyAmount`, {
       method: "Post",
-      headers: { "Content-Type" : "application/json" },
+      headers: getCommonHeaders(),
       body: JSON.stringify(TotalAmountDTO)
     });
      if(!response.ok)
@@ -635,7 +639,6 @@ async function FetchBookFromClient(BookingDTO) {
   {
     const response = await apiFetch(`BusBookingRest/BookFromClient`, {
       method: "Post",
-      headers: { "Content-Type" : "application/json" },
       body: JSON.stringify(BookingDTO)
     });
      if(!response.ok)
