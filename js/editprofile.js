@@ -1,4 +1,4 @@
-import { checkAuth , apiFetch } from "../Auth/auth.js";
+import { checkAuth , apiFetch , apiFetchForUpdateCustomer } from "../Auth/auth.js";
 
 const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
 
@@ -180,12 +180,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         };
 
         const updatedCustomer = await FetchUpdateProfile(CustomerDTO,avatarInput);
-        if(!updatedCustomer)
-            console.log("error");
-        else
-        {
-        successModal.classList.remove("hidden");
-        fillForm(updatedCustomer);
+        if (!updatedCustomer) {
+            console.log("error update failed");
+            // إعادة الأزرار للحالة الطبيعية عند الفشل
+            saveBtn.disabled = false;
+            cancelBtn.disabled = false;
+            saveBtn.innerHTML = "Save Changes";
+        } else {
+            successModal.classList.remove("hidden");
+            fillForm(updatedCustomer);
+            saveBtn.innerHTML = "Save Changes"; // رجع النص بعد النجاح
         }
     });
 
@@ -206,18 +210,19 @@ async function FetchUpdateProfile(customerDTO, fileInput) {
             formData.append("Image", fileInput.files[0]);
         }
 
-        const response = await apiFetch(`BusBookingRest/UpdateProfile`, {
+        const response = await apiFetchForUpdateCustomer(`BusBookingRest/UpdateProfile`, {
             method: "PUT",
             body: formData // المتصفح يضبط Content-Type على multipart/form-data تلقائياً، مع إضافة حدود (boundaries) لتفريق الحقول عن الملفات.
         });
 
         if (!response.ok) {
-            console.error(response.statusText);
+           const errorData = await response.json(); 
+            console.error("Server Error Details:", errorData);
             return null;
         }
         return await response.json();
     } catch (error) {
-        console.error(error);
+        console.error("Network or Parsing Error:", error);
         return null;
     }
 }

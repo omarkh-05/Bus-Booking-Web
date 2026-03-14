@@ -7,6 +7,9 @@ const getCommonHeaders = () => ({
     "Content-Type": "application/json",
     "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
 });
+const getCommonHeadersForUpdate = () => ({
+    "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
+});
 // ----------------------
 // Register function
 // ----------------------
@@ -176,7 +179,46 @@ export async function apiFetch(url, options = {}) {
     return null;
   }
 }
+export async function apiFetchForUpdateCustomer(url, options = {}) {
+  try{
+    options.headers = {
+      ...getCommonHeadersForUpdate(),
+      ...options.headers
+    };
+    options.credentials = "include";
+    
+    const token = sessionStorage.getItem("accessToken");
+    if (token) {
+        options.headers["Authorization"] = `Bearer ${token}`;
+    }
+    let response = await fetch(`${UrlBase}${url}`, options);
 
+    if (response.status === 401) {
+        log("Access token expired → attempting refresh");
+        const phoneNumber = getCookie("phoneNumber");
+        if (!phoneNumber) {
+            log("Refresh aborted → phoneNumber cookie missing");
+            forceLogout();
+            return response;
+        }
+        const newToken = await refreshAccessToken(phoneNumber);
+        if (!newToken) {
+            log("Refresh failed → user logged out");
+            forceLogout();
+            return response;
+        }
+        log("Refresh succeeded → retrying request");
+        options.headers["Authorization"] = `Bearer ${newToken}`;
+        response = await fetch(`${UrlBase}${url}`, options);
+    }
+
+    return response;
+  }catch(ex)
+  {
+    console.error(ex);
+    return null;
+  }
+}
 
 // ----------------------
 // Helper to get cookie

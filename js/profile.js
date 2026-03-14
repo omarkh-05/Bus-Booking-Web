@@ -25,12 +25,22 @@ document.addEventListener("DOMContentLoaded", async () => {
    const description = customer.discription;
    const testimg = document.getElementById("testimg");
 
-   const fileName = customerProfilePicture.split('/').pop().split('\\').pop(); // بيعطيك image123.jpg
-
-  const imgUrl = await FetchImage(fileName);
-   if(imgUrl){
-      testimg.src = imgUrl;
-   }
+      // التحقق من وجود مسار الصورة قبل معالجته
+      if (customerProfilePicture) {
+          const fileName = customerProfilePicture.split('/').pop().split('\\').pop();
+          const imgUrl = await FetchImage(fileName);
+      
+          if (imgUrl) {
+              if (testimg) testimg.src = imgUrl;
+              if (profileAvatar) {
+                  profileAvatar.style.background = `#f3f3f3 url("${imgUrl}") center center no-repeat`;
+                  profileAvatar.style.backgroundSize = "cover";
+              }
+          }
+      } else {
+          // حل بديل في حال عدم وجود صورة للمستخدم (صورة افتراضية)
+          if (testimg) testimg.src = "../Icons/User.svg"; 
+      }
 
    if(profileAvatar)
    {
