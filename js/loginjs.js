@@ -100,8 +100,15 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
 
 // Inputs Load Logic
+const getCommonHeaders = () => ({
+    "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
+});
 async function loadCountries() {
-    const res = await fetch(`${UrlBase}BusBookingRest/GetCountries`);
+    const res = await fetch(`${UrlBase}BusBookingRest/GetCountries`, {
+        method: "GET",
+        headers: getCommonHeaders()
+      });
     const data = await res.json();
     const select = document.getElementById("Nationality");
     const fragment = document.createDocumentFragment();
