@@ -83,9 +83,16 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   if(await loginHelper(credentials)){
     setLoading(false);
     const urlParams = new URLSearchParams(window.location.search);
-    const redirectUrl = urlParams.get("redirect") || "/"; // صفحة افتراضية إذا لم يوجد
+    let redirectUrl = urlParams.get("redirect");
+
+    if (!redirectUrl || redirectUrl === "/") {
+        // إذا ما في رابط تحويل، أو الرابط هو "/"، رجعه للإندكس بالنسبة لمكانه الحالي
+        // بما أننا في مجلد html، فالإندكس هو خطوة لورا
+        redirectUrl = "../index.html";
+    }
+
     window.location.href = redirectUrl;
-  } else {
+} else {
     setLoading(false);
     printValidateErrorMessage("Login", "Invalid credentials");
   }
