@@ -1,5 +1,6 @@
 import { checkAuth, UrlBase , Logout , setLoading} from "../Auth/auth.js";
 
+  const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
 document.addEventListener("DOMContentLoaded", async () => {
    const profileAvatar = document.getElementById("content__avatar");
    const customerName = document.getElementById("customerName");
@@ -22,14 +23,15 @@ document.addEventListener("DOMContentLoaded", async () => {
    const customerCountryName = await FetchCountryName(customer.countryId);
    const customerProfilePicture = customer.imgUrl;
    const description = customer.discription;
-
    const testimg = document.getElementById("testimg");
 
-  const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
-  const imgUrl = API_BASE + customerProfilePicture;
-      console.log(imgUrl);
-      
+   const fileName = customerProfilePicture.split('/').pop().split('\\').pop(); // بيعطيك image123.jpg
+
+  const imgUrl = await FetchImage(fileName);
+   if(imgUrl){
       testimg.src = imgUrl;
+   }
+
    if(profileAvatar)
    {
       profileAvatar.style.background = `#f3f3f3 url("${imgUrl}") center center no-repeat`;
@@ -53,11 +55,12 @@ document.getElementById("btnLogout").addEventListener("click",async () => {
    await Logout();
 });
 
+
+// ========= Api Fetch Helpers =========
 const getCommonHeaders = () => ({
     "Content-Type": "application/json",
     "ngrok-skip-browser-warning": "true" // تخطي صفحة تحذير ngrok
 });
-// ========= Api Fetch Helpers =========
 async function FetchCountryName(countryId) {
    try {
       const response = await fetch(`${UrlBase}BusBookingRest/GetCountrNameById/${countryId}`, {
@@ -78,6 +81,28 @@ async function FetchCountryName(countryId) {
          return text; // fallback to plain string
          }*/
    } catch(error) {
+      console.error(error);
+      return null;
+   }
+}
+async function FetchImage(imgName) {
+   try {
+      const response = await fetch(`${API_BASE}/api/BusBookingRest/GetCustomerImage/${imgName}`, {
+         method: "GET",
+         headers: getCommonHeaders()
+      });
+
+      if(!response.ok) { 
+         console.error(response.statusText);
+         return null;
+      }
+
+      const blob = await response.blob();
+      const imageUrl = URL.createObjectURL(blob);
+
+      return imageUrl;
+
+   } catch (error) {
       console.error(error);
       return null;
    }

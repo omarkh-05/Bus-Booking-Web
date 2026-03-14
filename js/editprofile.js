@@ -1,5 +1,7 @@
 import { checkAuth , apiFetch } from "../Auth/auth.js";
 
+const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
+
 document.addEventListener("DOMContentLoaded", async function () {
 
     const avatarInput = document.getElementById("avatarInput");
@@ -33,16 +35,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     // ======================
     // Fill form with user data
     // ======================
-    function fillForm(customer) {
+   async function fillForm(customer) {
         nameInput.value = customer.fullName || "";
         phoneInput.value = customer.phoneNumber || "";
         emailInput.value = customer.email || "";
         description.value = customer.discription || "";
 
-        const API_BASE = "https://professionally-overjocular-chelsie.ngrok-free.dev";
-
         if (customer.imgUrl) {
-         avatarPreview.src = API_BASE + customer.imgUrl;
+         const fileName = customer.imgUrl.split('/').pop().split('\\').pop();
+         const imgUrl = await FetchImage(fileName);
+         if (imgUrl) {
+            avatarPreview.src = imgUrl;
+        }
         }
         originalData = {
             name: nameInput.value,
@@ -212,6 +216,30 @@ async function FetchUpdateProfile(customerDTO, fileInput) {
             return null;
         }
         return await response.json();
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+async function FetchImage(imgName) {
+    try {
+        const response = await fetch(`${API_BASE}/api/BusBookingRest/GetCustomerImage/${imgName}`, {
+            method: "GET",
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            }
+        });
+
+        if (!response.ok) {
+            console.error(response.statusText);
+            return null;
+        }
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+
+        return imageUrl;
+
     } catch (error) {
         console.error(error);
         return null;

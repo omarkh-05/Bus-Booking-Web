@@ -144,7 +144,7 @@ body {
   left: 50%;
   z-index: 2;
   transform: translate(-50%, 50%);
-  background: #f3f3f3 url("/Icons/User.svg") center center no-repeat;
+  background: #f3f3f3 url("../Icons/User.svg") center center no-repeat;
   background-size: cover;
   border-radius: 50%;
   outline: 5px solid #fff;
