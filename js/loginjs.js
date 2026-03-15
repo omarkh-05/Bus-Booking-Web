@@ -150,6 +150,7 @@ phoneInput.forEach(input => {
   input.addEventListener("input", function () {
     let numbers = this.value.replace(/\D/g, ""); // إزالة أي شيء غير رقم
     let formatted = numbers;
+    
     if (numbers.length > 3) {
         formatted =
       "(+" +
